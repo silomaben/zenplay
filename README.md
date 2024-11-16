@@ -1,17 +1,9 @@
 
+<h1 style="color:white; font-weight:bold;">ZenPlay - Django Project Setup Guide</h1>
 
-
-```markdown
-
----
-
-
-## ZenPlay - Django Project Setup Guide
-
- Welcome to **ZenPlay**, a Django-based project! This guide outlines how to set up and run the project on a Windows machine.
+Welcome to **ZenPlay**, a Django-based project! This guide outlines how to set up and run the project on a Windows machine.
 
 ---
-
 
 ## Prerequisites
 
@@ -58,7 +50,7 @@ python -m venv venv
 
 Activate the virtual environment:
 ```cmd
-venv\Scripts\activate
+venv\Scriptsctivate
 ```
 
 ### Step 3: Install Dependencies
@@ -66,7 +58,6 @@ Install the required Python packages:
 ```cmd
 pip install -r requirements.txt
 ```
-
 
 ### Step 4: Apply Database Migrations
 Run the following commands to prepare the database:
@@ -101,7 +92,5 @@ python manage.py collectstatic
 ```
 
 ---
-
-  
 
 Happy coding! 🚀
