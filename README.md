@@ -2,7 +2,7 @@
 ```markdown
 # ZenPlay - Django Project Setup Guide
 
-Welcome to **ZenPlay**, a Django-based project! This guide outlines how to set up and run the project on a Windows machine.
+### Welcome to **ZenPlay**, a Django-based project! This guide outlines how to set up and run the project on a Windows machine.
 
 ---
 
@@ -60,29 +60,15 @@ Install the required Python packages:
 pip install -r requirements.txt
 ```
 
-### Step 4: Configure the Project
-1. Copy the `.env.example` file (if available) to `.env`:
-   ```cmd
-   copy .env.example .env
-   ```
 
-2. Open the `.env` file and set the required environment variables:
-   ```env
-   SECRET_KEY=<your-secret-key>
-   DEBUG=True
-   DATABASE_URL=<your-database-connection-string>
-   ```
-
-3. Ensure the database credentials match your local setup.
-
-### Step 5: Apply Database Migrations
+### Step 4: Apply Database Migrations
 Run the following commands to prepare the database:
 ```cmd
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### Step 6: Run the Development Server
+### Step 5: Run the Development Server
 Start the Django development server:
 ```cmd
 python manage.py runserver
@@ -94,12 +80,6 @@ Visit the app in your browser at:
 ---
 
 ## Additional Commands
-
-### Running Tests
-Execute the test suite to ensure everything works:
-```cmd
-python manage.py test
-```
 
 ### Creating a Superuser
 To create an admin account:
@@ -115,30 +95,7 @@ python manage.py collectstatic
 
 ---
 
-## Troubleshooting
-
-- **Virtual Environment Issues**  
-  If you face issues activating the virtual environment, use PowerShell and run:
-  ```powershell
-  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-  ```
-
-- **Database Connection Errors**  
-  Ensure your `.env` file has the correct database connection string.
-
----
-
-## Contribution
-
-Feel free to fork this repository and contribute to ZenPlay. For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-## License
-
-ZenPlay is open-source software licensed under the MIT License.  
+  
 
 Happy coding! 🚀
 ```
-
-Just copy and paste this into your `README.md` file in your project.
