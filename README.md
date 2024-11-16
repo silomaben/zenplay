@@ -1,10 +1,17 @@
 
-```markdown
-# ZenPlay - Django Project Setup Guide
 
-### Welcome to **ZenPlay**, a Django-based project! This guide outlines how to set up and run the project on a Windows machine.
+
+```markdown
 
 ---
+
+
+## ZenPlay - Django Project Setup Guide
+
+ Welcome to **ZenPlay**, a Django-based project! This guide outlines how to set up and run the project on a Windows machine.
+
+---
+
 
 ## Prerequisites
 
@@ -98,4 +105,3 @@ python manage.py collectstatic
   
 
 Happy coding! 🚀
-```
