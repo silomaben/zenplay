@@ -50,7 +50,7 @@ python -m venv venv
 
 Activate the virtual environment:
 ```cmd
-venv\Scriptsctivate
+venv\Scripts\ctivate
 ```
 
 ### Step 3: Install Dependencies
