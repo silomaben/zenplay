@@ -9,11 +9,10 @@ def order_movie(request):
     name = request.POST.get('name')
     phone = request.POST.get('phone')
     email = request.POST.get('email')
-    movie_title = request.POST.get('movieTitle')
     message = request.POST.get('message')
 
     subject = f"New movie order from {name}"
-    body = f"Name: {name}\nPhone: {phone}\nEmail: {email}\nMovie Title: {movie_title}\nMessage: {message}"
+    body = f"Name: {name}\nPhone: {phone}\nEmail: {email}\nMessage: {message}"
 
     try:
         send_mail(subject, body, 'birirmichael@gmail.com', ['recipient@example.com'])  # Update with the recipient email

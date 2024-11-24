@@ -1,293 +1,292 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Slideshow</title>
-    <style>
-      .load-more-container {
-    text-align: center; /* Center the button */
-    margin: 20px 0; /* Space around the button */
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Slideshow</title>
 
-.load-more-container button {
-    background-color: #007bff; /* Bootstrap primary color */
-    color: white;
-    border: none;
-    padding: 12px 25px; /* Larger padding for a more clickable button */
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px; /* Larger font size */
-    transition: background-color 0.3s ease; /* Smooth color transition */
-}
+  <style>
+    /* Card container */
+    .slide {
+      position: relative;
+      display: inline-block;
+      margin: 10px;
+      width: 200px;
+      /* Fixed width for uniform size */
+      height: 300px;
+      /* Fixed height for uniform size */
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+      background-color: #fff;
+      /* Consistent background for cards */
+    }
 
-.load-more-container button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
-}
+    /* Hover effect */
+    .slide:hover {
+      transform: scale(1.05);
+    }
 
-.load-more-container button:focus {
-    outline: none; /* Remove default focus outline */
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5); /* Custom focus outline */
-}
+    /* Movie poster styling */
+    .slide img {
+      width: 100%;
+      /* Ensure the image fits the card width */
+      height: 200px;
+      /* Fixed height for the image */
+      object-fit: cover;
+      /* Crop or scale image to fit without distortion */
+    }
 
-      body {
-    font-family: Arial, sans-serif;
-}
+    /* Movie title caption */
+    .caption {
+      height: 80px;
+      /* Fixed height for text container */
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      overflow: hidden;
+      /* Hide overflow text */
+      text-overflow: ellipsis;
+      /* Add ellipsis for long titles */
+      white-space: nowrap;
+      /* Prevent text wrapping */
+      background-color: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.slideshow-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 20px auto;
-    width: 80%;
-}
+    /* Dot indicating selection */
+    .selection-dot {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      background-color: transparent;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
 
-.slide {
-    position: relative;
-    width: 200px; /* Set a fixed width for slides */
-    margin: 10px;
-    cursor: pointer;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    transition: transform 0.2s;
-}
-
-.slide img {
-    width: 100%;
-    height: auto;
-}
-
-.slide:hover {
-    transform: scale(1.05);
-}
-
-.caption {
-    text-align: center;
-    font-weight: bold;
-    padding: 5px;
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.order_section {
-    background-color: #f8f9fa; /* Light background for the order section */
-    padding: 20px;
-}
-
-.form-container {
-    background-color: #ffffff; /* White background for the form */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.btn_box {
-    text-align: center;
-}
-
-.btn_box button {
-    background-color: #007bff; /* Bootstrap primary color */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn_box button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
-}
+    /* Dot style when selected */
+    .selection-dot.selected {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+  </style>
 
 
-    </style>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
 
-    
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
-    
-    <!-- Fonts style -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Owl slider stylesheet -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    
-    <!-- Nice select -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
-    
-    <!-- Font Awesome style -->
-    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+  <!-- Fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    
-    <!-- Responsive style -->
-    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  <!-- Owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- Nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+    integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+
+  <!-- Font Awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+
+  <!-- Responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
 </head>
-<body class="sub_page">
-    <div class="hero_area">
-        <div class="hero_bg_box">
-          <img src="{% static 'images/zen int.png' %}" alt="">
-        </div>
-          <!-- header section strats -->
-        <header class="header_section">
-          <div class="header_top">
-            <div class="container-fluid header_top_container">
-    
-              <div class="contact_nav">
-                <a href="">
-                  <i class="fa fa-map-marker" aria-hidden="true"></i>
-                  <span>
-                    Location
-                  </span>
-                </a>
-                <a href="">
-                  <i class="fa fa-phone" aria-hidden="true"></i>
-                  <span>
-                    Call : +254717255474
-                  </span>
-                </a>
-                <a href="">
-                  <i class="fa fa-envelope" aria-hidden="true"></i>
-                  <span>
-                    zenplaygamingke@gmail.com
-                  </span>
-                </a>
-              </div>
-              <div class="social_box">
-                <a href="">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="header_bottom">
-            <div class="container-fluid">
-              <nav class="navbar navbar-expand-lg custom_nav-container ">
-                <a class="navbar-brand " href="{% url 'index' %}"> Zenplay </a>
-    
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class=""> </span>
-                </button>
-    
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav  ">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'about' %}"> About</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'service' %}">Services</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'team' %}"> Team </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        <span>
-                          Login
-                        </span>
-                      </a>
-                    </li>
-                    <form class="form-inline justify-content-center">
-                      <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                      </button>
-                    </form>
-                  </ul>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </header>
-        <!-- end header section -->
-       
-      </div>
-<div class="slideshow-container" id="slideshowContainer">
-    <!-- Slides will be populated here -->
-</div>
 
-<!-- Load More Button -->
-<div class="load-more-container">
-  <button id="loadMore">Load More Movies</button>
-</div>
-<!-- movies order section -->
-<section class="order_section">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 px-0">
-        <div class="img-box">
-          <img src="{% static 'images/zenplay us.jpg' %}" class="box_img" alt="Order Image">
+<body class="sub_page">
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <img src="{% static 'images/zen int.png' %}" alt="">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="header_top">
+        <div class="container-fluid header_top_container">
+
+          <div class="contact_nav">
+            <a href="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Location
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                Call : +254717255474
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                zenplaygamingke@gmail.com
+              </span>
+            </a>
+          </div>
+          <div class="social_box">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
         </div>
       </div>
-      <div class="col-md-5 mx-auto">
-        <div class="form_container">
-          <div class="heading_container heading_center">
-            <h2>Order Your Movie</h2>
+      <div class="header_bottom">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand " href="{% url 'index' %}"> Zenplay </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'movies' %}">Movies</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'games' %}">Games</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'team' %}"> Team </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span>
+                      Login
+                    </span>
+                  </a>
+                </li>
+                <form class="form-inline justify-content-center">
+                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- end header section -->
+
+  </div>
+
+
+  <div class="slideshow-container" id="slideshowContainer"
+    style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; background-color: #f0f0f0;">
+    <!-- Slides will be populated here -->
+  </div>
+
+
+  <!-- Load More Button -->
+  <div class="load-more-container"
+    style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px;">
+    <button id="loadMore"
+      style="background-color: #007bff; color: white; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer;">
+      Load More Movies
+    </button>
+  </div>
+
+  <br>
+
+
+  <!-- movies new form  -->
+  <section class="contact_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 px-0">
+          <div class="img-box">
+            <img src="{% static 'images/zenplay us.jpg' %}" class="box_img" alt="about img">
           </div>
-          <form method="post" action="{% url 'order_movie' %}">
-            {% csrf_token %}
-            <div class="form-row">
-              <div class="form-group col">
-                <input type="text" class="form-control" name="name" placeholder="Your Name" required />
-              </div>
+        </div>
+        <div class="col-md-5 mx-auto">
+          <div class="form_container">
+            <div class="heading_container heading_center">
+              <h2>Order Your Movie</h2>
             </div>
-            <div class="form-row">
-              <div class="form-group col-lg-6">
-                <input type="text" class="form-control" name="phone" placeholder="Phone Number" required />
+            <form method="post" action="{% url 'order_movie' %}">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group col">
+                  <input type="text" class="form-control" name="name" placeholder="Your Name" required />
+                </div>
               </div>
-              <div class="form-group col-lg-6">
-                <input type="text" class="form-control" name="movieTitle" placeholder="Movie Title" required />
+              <div class="form-row">
+                <div class="form-group col-lg-6">
+                  <input type="text" class="form-control" name="phone" placeholder="Phone Number" required />
+                </div>
+                <div class="form-group col">
+                  <input type="email" class="form-control" name="email" placeholder="Email" required />
+                </div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col">
-                <input type="email" class="form-control" name="email" placeholder="Email" required />
+              <div class="form-row">
+                <div class="form-group col">
+                  <textarea class="message-box form-control" name="message" placeholder="Selected Movies"
+                    required></textarea>
+                </div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col">
-                <textarea class="message-box form-control" name="message" placeholder="Additional Message (optional)"></textarea>
+              <div class="btn_box">
+                <button type="submit">Order</button>
               </div>
-            </div>
-            <div class="btn_box">
-              <button type="submit">SEND ORDER</button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- end movies order section -->
-<!-- info section -->
+  </section>
+  <!-- movies new form  -->
+
+  <br><br>
+
+  <!-- end movies order section -->
+   <!-- info section -->
   <section class="info_section ">
     <div class="container">
       <div class="info_top">
         <div class="row">
           <div class="col-md-3 ">
-            <a class="navbar-brand" href="index.html">
-              Finter
+            <a class="navbar-brand" href="{% url 'index' %}">
+              Zenplay
             </a>
           </div>
           <div class="col-md-5 ">
             <div class="info_contact">
-              <a href="">
+              <a href="https://www.google.com/maps/place/AVENUE+MALL/@0.0395765,37.6527027,17z/data=!3m1!4b1!4m6!3m5!1s0x178821c445cd526d:0x77b8492b4274e644!8m2!3d0.0395765!4d37.6527027!16s%2Fg%2F11v5s528nm?hl=en-KE&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
                   Location
@@ -296,7 +295,7 @@
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  +01 1234567890
+                  +254 717255474
                 </span>
               </a>
             </div>
@@ -323,13 +322,9 @@
         <div class="row">
           <div class="col-lg-3 col-md-6">
             <div class="info_detail">
-              <h5>
-                Company
-              </h5>
+              
               <p>
-                Randomised words which don't look even slightly believable. If you are going to use a passage of
-                Lorem
-                Ipsum, you need to be sure
+                The zenplay gaming shop offers a wide selection of video games, consoles, and accessories. With easy navigation and secure payment options, it ensures a smooth shopping experience. Regular discounts are available.
               </p>
             </div>
           </div>
@@ -349,12 +344,12 @@
           <div class="col-lg-4 col-md-6">
             <div class="info_detail">
               <h5>
-                Services
+                <!-- Services -->
               </h5>
               <p>
-                Randomised words which don't look even slightly believable. If you are going to use a passage of
+                <!-- Randomised words which don't look even slightly believable. If you are going to use a passage of
                 Lorem
-                Ipsum, you need to be sure
+                Ipsum, you need to be sure -->
               </p>
             </div>
           </div>
@@ -365,27 +360,37 @@
               </h5>
               <ul class="info_menu">
                 <li>
-                  <a href="index.html">
+                  <a href="{% url 'index' %}">
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="about.html">
+                  <a href="{% url 'about' %}">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="service.html">
+                  <a href="{% url 'service' %}">
                     Services
                   </a>
                 </li>
                 <li>
-                  <a href="team.html">
+                  <a href="{% url 'movies' %}">
+                    Movies
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'games' %}">
+                    Games
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'team' %}">
                     Team
                   </a>
                 </li>
                 <li class="mb-0">
-                  <a href="contact.html">
+                  <a href="{% url 'contact' %}">
                     Contact Us
                   </a>
                 </li>
@@ -403,14 +408,88 @@
   <footer class="footer_section">
     <div class="container">
       <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
+        &copy; <span id="displayYear"></span> Zenplaygamingke
       </p>
     </div>
   </footer>
   <!-- footer section -->
 
-<script>const API_KEY_TMDB = 'd710ffb597f3b14b49a3b7c98e9e16d9'; // Your TMDB API key
+  <script>
+    const API_KEY_TMDB = 'd710ffb597f3b14b49a3b7c98e9e16d9'; // Your TMDB API key
+    let currentPage = 1;
+    const PAGE_SIZE = 5; // Number of movies to fetch per request
+    const API_URL = (page) => `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY_TMDB}&language=en-US&page=${page}`;
+
+    async function fetchMovies(page) {
+      try {
+        const response = await fetch(API_URL(page));
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        const slideshowContainer = document.getElementById('slideshowContainer');
+
+        data.results.forEach(item => {
+          const movieTitle = item.title;
+          const moviePoster = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+
+          const slide = document.createElement('div');
+          slide.className = 'slide';
+
+          // Initialize the card as unselected
+          slide.setAttribute('data-selected', 'false');
+          slide.onclick = () => toggleSelection(slide, movieTitle);
+
+          slide.innerHTML = `
+                    <div class="selection-dot"></div>
+                    <img src="${moviePoster}" alt="${movieTitle}">
+                    <div class="caption">${movieTitle}</div>
+                `;
+
+          slideshowContainer.appendChild(slide);
+        });
+      } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+      }
+    }
+
+    function toggleSelection(slide, movieTitle) {
+      const isSelected = slide.getAttribute('data-selected') === 'true';
+
+      // Reference to the message box
+      const messageBox = document.querySelector('textarea[name="message"]');
+
+      // Split existing message into an array of movie titles
+      let selectedMovies = messageBox.value ? messageBox.value.split(', ') : [];
+
+      if (isSelected) {
+        // Remove the movie title from the selected list
+        selectedMovies = selectedMovies.filter(movie => movie !== movieTitle);
+        slide.setAttribute('data-selected', 'false');
+        slide.querySelector('.selection-dot').classList.remove('selected');
+      } else {
+        // Add the movie title to the selected list
+        selectedMovies.push(movieTitle);
+        slide.setAttribute('data-selected', 'true');
+        slide.querySelector('.selection-dot').classList.add('selected');
+      }
+
+      // Update the message box with the selected movies
+      messageBox.value = selectedMovies.join(', ');
+
+      console.log(`Movie "${movieTitle}" selected: ${!isSelected}`);
+    }
+
+
+    // Load more movies on button click
+    document.getElementById('loadMore').addEventListener('click', function () {
+      currentPage++;
+      fetchMovies(currentPage);
+    });
+
+    // Fetch initial movies on page load
+    fetchMovies(currentPage);
+  </script>
+
+  <!-- <script>const API_KEY_TMDB = 'd710ffb597f3b14b49a3b7c98e9e16d9'; // Your TMDB API key
   let currentPage = 1;
   const PAGE_SIZE = 5; // Number of movies to fetch per request
   const API_URL = (page) => `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY_TMDB}&language=en-US&page=${page}`;
@@ -458,24 +537,29 @@
   
   // Fetch initial movies on page load
   fetchMovies(currentPage);
-  </script>
+  </script> -->
 
-<!-- jQuery -->
-<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<!-- Popper JS -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<!-- Bootstrap JS -->
-<script src="{% static 'js/bootstrap.js' %}"></script>
-<!-- Owl slider -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- Nice select -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
-<!-- Custom JS -->
-<script src="{% static 'js/custom.js' %}"></script>
-<!-- Google Map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-<!-- End Google Map -->
+  <!-- jQuery -->
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <!-- Owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- Nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"
+    integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+  <!-- Custom JS -->
+  <script src="{% static 'js/custom.js' %}"></script>
+  <!-- Google Map -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
 
 
 </body>
+
 </html>

@@ -97,10 +97,13 @@
                   <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}"> About</a>
+                  <a class="nav-link" href="{% url 'movies' %}">Movies</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'service' %}">Services</a>
+                  <a class="nav-link" href="{% url 'games' %}">Games</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}"> About</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'team' %}"> Team </a>
@@ -222,6 +225,21 @@
           <div class="item">
             <div class="box">
               <div class="img-box">
+                <img src="{% static 'images/movies.png' %}" alt="Movie Sales" />
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Movie Sales
+                </h5>
+                <p>
+                  Discover a wide selection of films to purchase or rent, from classics to the latest releases.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="box">
+              <div class="img-box">
                 <img src="{% static 'images/s6.png' %}" alt="Racing Sims" />
               </div>
               <div class="detail-box">
@@ -236,21 +254,7 @@
           </div>
         </div>
       </div>
-      <div class="item">
-        <div class="box">
-          <div class="img-box">
-            <img src="{% static 'images/movies.png' %}" alt="Movie Sales" />
-          </div>
-          <div class="detail-box">
-            <h5>
-              Movie Sales
-            </h5>
-            <p>
-              Discover a wide selection of films to purchase or rent, from classics to the latest releases.
-            </p>
-          </div>
-        </div>
-      </div>
+      
       
       <div class="btn-box">
         <a href="{% url 'about' %}">
@@ -262,141 +266,147 @@
 </section>
 <!-- service section ends -->
 
-  <!-- info section -->
-  <section class="info_section ">
-    <div class="container">
-      <div class="info_top">
-        <div class="row">
-          <div class="col-md-3 ">
-            <a class="navbar-brand" href="index.html">
-              Zenplay
+<!-- info section -->
+<section class="info_section ">
+  <div class="container">
+    <div class="info_top">
+      <div class="row">
+        <div class="col-md-3 ">
+          <a class="navbar-brand" href="{% url 'index' %}">
+            Zenplay
+          </a>
+        </div>
+        <div class="col-md-5 ">
+          <div class="info_contact">
+            <a href="https://www.google.com/maps/place/AVENUE+MALL/@0.0395765,37.6527027,17z/data=!3m1!4b1!4m6!3m5!1s0x178821c445cd526d:0x77b8492b4274e644!8m2!3d0.0395765!4d37.6527027!16s%2Fg%2F11v5s528nm?hl=en-KE&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Location
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                +254 717255474
+              </span>
             </a>
           </div>
-          <div class="col-md-5 ">
-            <div class="info_contact">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  +01 1234567890
-                </span>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-4 ">
-            <div class="social_box">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="info_bottom">
-        <div class="row">
-          <div class="col-lg-3 col-md-6">
-            <div class="info_detail">
-              <h5>
-                Company
-              </h5>
-              <p>
-                Randomised words which don't look even slightly believable. If you are going to use a passage of
-                Lorem
-                Ipsum, you need to be sure
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="info_form">
-              <h5>
-                NEWSLETTER
-              </h5>
-              <form action="">
-                <input type="text" placeholder="Enter Your Email" />
-                <button type="submit">
-                  Subscribe
-                </button>
-              </form>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="info_detail">
-              <h5>
-                Services
-              </h5>
-              <p>
-                Randomised words which don't look even slightly believable. If you are going to use a passage of
-                Lorem
-                Ipsum, you need to be sure
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-6">
-            <div class="">
-              <h5>
-                Useful links
-              </h5>
-              <ul class="info_menu">
-                <li>
-                  <a href="{% url 'index' %}">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'about' %}">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'service' %}">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'team' %}">
-                    Team
-                  </a>
-                </li>
-                <li class="mb-0">
-                  <a href="{% url 'contact' %}">
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div>
+        <div class="col-md-4 ">
+          <div class="social_box">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- end info_section -->
-
- 
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
-      </p>
+    <div class="info_bottom">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="info_detail">
+            <h5>
+              Company
+            </h5>
+            <p>
+              The zenplay gaming shop offers a wide selection of video games, consoles, and accessories. With easy navigation and secure payment options, it ensures a smooth shopping experience. Regular discounts are available.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="info_form">
+            <h5>
+              NEWSLETTER
+            </h5>
+            <form action="">
+              <input type="text" placeholder="Enter Your Email" />
+              <button type="submit">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="info_detail">
+            <h5>
+              <!-- Services -->
+            </h5>
+            <p>
+              <!-- Randomised words which don't look even slightly believable. If you are going to use a passage of
+              Lorem
+              Ipsum, you need to be sure -->
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="">
+            <h5>
+              Useful links
+            </h5>
+            <ul class="info_menu">
+              <li>
+                <a href="{% url 'index' %}">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'about' %}">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'service' %}">
+                  Services
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'movies' %}">
+                  Movies
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'games' %}">
+                  Games
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'team' %}">
+                  Team
+                </a>
+              </li>
+              <li class="mb-0">
+                <a href="{% url 'contact' %}">
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
-  <!-- footer section -->
+  </div>
+</section>
+
+<!-- end info_section -->
+
+<!-- footer section -->
+<footer class="footer_section">
+  <div class="container">
+    <p>
+      &copy; <span id="displayYear"></span> Zenplaygamingke
+    </p>
+  </div>
+</footer>
+<!-- footer section -->
 
   <!-- jQery -->
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>

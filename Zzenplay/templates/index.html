@@ -126,10 +126,13 @@
                   <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}"> About</a>
+                  <a class="nav-link" href="{% url 'movies' %}">Movies</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'service' %}">Services</a>
+                  <a class="nav-link" href="{% url 'games' %}">Games</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}"> About</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'team' %}"> Team </a>
@@ -317,6 +320,7 @@
    
   
   <!-- about section -->
+   <br><br><br>
 
 
   <section class="about_section">
@@ -328,7 +332,7 @@
               <h2>About Us</h2>
             </div>
             <p class="detail_p_mt">
-              At zenplaygamingke, we are passionate about bringing your entertainment dreams to life. We specialize in offering a wide range of premium services that cater to every facet of your gaming and entertainment needs. From the latest PS4 and PS5 games to cutting-edge VR experiences, we ensure you have access to the most exciting and immersive content available.
+              At Zenplaygamingke, we are passionate about bringing your entertainment dreams to life. We specialize in offering a wide range of premium services that cater to every facet of your gaming and entertainment needs. From the latest PS4 and PS5 games to cutting-edge VR experiences, we ensure you have access to the most exciting and immersive content available.
               
             </p>
             <p class="detail_p_mt">
@@ -716,7 +720,7 @@
       <div class="info_top">
         <div class="row">
           <div class="col-md-3 ">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{% url 'index' %}">
               Zenplay
             </a>
           </div>
@@ -731,7 +735,7 @@
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  +01 1234567890
+                  +254 717255474
                 </span>
               </a>
             </div>
@@ -758,13 +762,9 @@
         <div class="row">
           <div class="col-lg-3 col-md-6">
             <div class="info_detail">
-              <h5>
-                Company
-              </h5>
+              
               <p>
-                Randomised words which don't look even slightly believable. If you are going to use a passage of
-                Lorem
-                Ipsum, you need to be sure
+                The zenplay gaming shop offers a wide selection of video games, consoles, and accessories. With easy navigation and secure payment options, it ensures a smooth shopping experience. Regular discounts are available.
               </p>
             </div>
           </div>
@@ -784,12 +784,12 @@
           <div class="col-lg-4 col-md-6">
             <div class="info_detail">
               <h5>
-                Services
+                <!-- Services -->
               </h5>
               <p>
-                Randomised words which don't look even slightly believable. If you are going to use a passage of
+                <!-- Randomised words which don't look even slightly believable. If you are going to use a passage of
                 Lorem
-                Ipsum, you need to be sure
+                Ipsum, you need to be sure -->
               </p>
             </div>
           </div>
@@ -812,6 +812,16 @@
                 <li>
                   <a href="{% url 'service' %}">
                     Services
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'movies' %}">
+                    Movies
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'games' %}">
+                    Games
                   </a>
                 </li>
                 <li>
@@ -838,8 +848,7 @@
   <footer class="footer_section">
     <div class="container">
       <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
+        &copy; <span id="displayYear"></span> Zenplaygamingke
       </p>
     </div>
   </footer>
