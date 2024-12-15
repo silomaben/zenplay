@@ -205,7 +205,7 @@
         <div class="col-md-5 mx-auto">
           <div class="form_container">
             <div class="heading_container heading_center">
-              <h2>Order Your Movie</h2>
+              <h2>Order Games</h2>
             </div>
             <form method="post" action="{% url 'order_game' %}">
               {% csrf_token %}
@@ -341,6 +341,16 @@
                 </a>
               </li>
               <li>
+                <a href="{% url 'movies' %}">
+                  Movies
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'games' %}">
+                  Games
+                </a>
+              </li>
+              <li>
                 <a href="{% url 'team' %}">
                   Team
                 </a>
@@ -392,14 +402,28 @@
 
                 // Initialize the card as unselected
                 slide.setAttribute('data-selected', 'false');
-                slide.onclick = () => toggleGameSelection(slide, gameTitle);
 
+                // Add click event to the selection dot only
+                const selectionDot = document.createElement('div');
+                selectionDot.className = 'selection-dot';
+                selectionDot.onclick = (e) => {
+                    e.stopPropagation(); // Prevent the click from triggering the slide's onclick
+                    toggleGameSelection(slide, gameTitle);
+                };
+
+                // Open trailer search when clicking anywhere on the slide
+                slide.onclick = () => {
+                    openTrailerSearch(gameTitle);
+                };
+
+                // Add content to the slide
                 slide.innerHTML = `
-                    <div class="selection-dot"></div>
-                    <img src="${gameThumbnail}" alt="${gameTitle}">
-                    <div class="caption">${gameTitle}</div>
+                  <img src="${gameThumbnail}" alt="${gameTitle}">
+                  <div class="caption">${gameTitle}</div>
                 `;
-
+                
+                // Append the selection dot inside the slide
+                slide.appendChild(selectionDot);
                 slideshowContainer.appendChild(slide);
             });
         } catch (error) {
@@ -433,6 +457,16 @@
 
         console.log(`Game "${gameTitle}" selected: ${!isSelected}`);
     }
+
+
+    function openTrailerSearch(gameTitle) {
+        const videoUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameTitle + ' trailer')}`;
+        window.open(videoUrl, '_blank');
+
+        // Set the game title in the order form
+        document.querySelector('input[name="gameTitle"]').value = gameTitle; // Update to match your form
+    } 
+
 
     // Load more games on button click
     document.getElementById('loadMore').addEventListener('click', function () {

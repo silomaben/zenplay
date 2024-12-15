@@ -436,13 +436,29 @@
 
           // Initialize the card as unselected
           slide.setAttribute('data-selected', 'false');
-          slide.onclick = () => toggleSelection(slide, movieTitle);
 
+          // Add click event to the selection dot only
+          const selectionDot = document.createElement('div');
+          selectionDot.className = 'selection-dot';
+          selectionDot.onclick = (e) => {
+              e.stopPropagation(); // Prevent the click from triggering the slide's onclick 
+              toggleSelection(slide, movieTitle);
+          };
+
+          // Open trailer search when clicking anywhere on the slide
+          slide.onclick = () => {
+                    openTrailerSearch(movieTitle);
+                };
+
+
+          // Add content to the slide
           slide.innerHTML = `
-                    <div class="selection-dot"></div>
-                    <img src="${moviePoster}" alt="${movieTitle}">
-                    <div class="caption">${movieTitle}</div>
-                `;
+          <img src="${moviePoster}" alt="${movieTitle}">
+          <div class="caption">${movieTitle}</div>
+          `;
+          
+          // Append the selection dot inside the slide
+          slide.appendChild(selectionDot);
 
           slideshowContainer.appendChild(slide);
         });
@@ -478,6 +494,13 @@
       console.log(`Movie "${movieTitle}" selected: ${!isSelected}`);
     }
 
+    function openTrailerSearch(movieTitle) {
+      const videoUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(movieTitle + ' trailer')}`;
+      window.open(videoUrl, '_blank');
+  
+      // Set the movie title in the order form
+      document.querySelector('input[name="movieTitle"]').value = movieTitle; // Updated to match your form
+    }
 
     // Load more movies on button click
     document.getElementById('loadMore').addEventListener('click', function () {
