@@ -96,7 +96,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'birirmichael@gmail.com'
-EMAIL_HOST_PASSWORD = 'weof xusp kpox bsgx'
+EMAIL_HOST_PASSWORD = 'usqs wmde nofj iowp'
 
 
 
@@ -144,6 +144,9 @@ STATICFILES_DIRS = [
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+MEDIA_URL = '/media/'  # URL to access media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Folder to store uploaded media
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

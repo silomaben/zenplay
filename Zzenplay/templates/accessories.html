@@ -7,16 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Slideshow</title>
 
+
   <style>
-    /* Card container */
+    /* Existing card styles */
     .slide {
       position: relative;
       display: inline-block;
       margin: 10px;
       width: 200px;
-      /* Fixed width for uniform size */
       height: 300px;
-      /* Fixed height for uniform size */
       border: 1px solid #ccc;
       border-radius: 10px;
       overflow: hidden;
@@ -24,45 +23,33 @@
       cursor: pointer;
       transition: transform 0.2s ease-in-out;
       background-color: #fff;
-      /* Consistent background for cards */
     }
 
-    /* Hover effect */
     .slide:hover {
       transform: scale(1.05);
     }
 
-    /* Movie poster styling */
     .slide img {
       width: 100%;
-      /* Ensure the image fits the card width */
       height: 200px;
-      /* Fixed height for the image */
       object-fit: cover;
-      /* Crop or scale image to fit without distortion */
     }
 
-    /* Movie title caption */
     .caption {
       height: 80px;
-      /* Fixed height for text container */
       padding: 10px;
       text-align: center;
       font-size: 14px;
       font-weight: bold;
       overflow: hidden;
-      /* Hide overflow text */
       text-overflow: ellipsis;
-      /* Add ellipsis for long titles */
       white-space: nowrap;
-      /* Prevent text wrapping */
       background-color: #f9f9f9;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Dot indicating selection */
     .selection-dot {
       position: absolute;
       top: 10px;
@@ -75,7 +62,6 @@
       transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
-    /* Dot style when selected */
     .selection-dot.selected {
       background-color: #007bff;
       border-color: #007bff;
@@ -206,15 +192,68 @@
 
   </div>
 
+  <div class="container">
+    <!-- <h1>Accessories Selection</h1> -->
+    <div id="slideshowContainer">
+      {% for accessory in accessories %}
+      <div class="slide" data-selected="false">
+        <img src="{{ accessory.image.url }}" alt="{{ accessory.name }}">
+        <span class="caption">{{ accessory.name }} - {{ accessory.price }}</span>
+        <div class="selection-dot" onclick="toggleSelection(this.parentNode, '{{ accessory.name }}')"></div>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
 
-  <div class="slideshow-container" id="slideshowContainer"
-    style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; background-color: #f0f0f0;">
-    <!-- Slides will be populated here -->
-  </div>
+
+    <section class="contact_section">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 px-0">
+            <div class="img-box">
+              <img src="{% static 'images/zenplay us.jpg' %}" class="box_img" alt="about img">
+            </div>
+          </div>
+          <div class="col-md-5 mx-auto">
+            <div class="form_container">
+              <div class="heading_container heading_center">
+                <h2>Order Your Accessories</h2>
+              </div>
+              <form method="post" action="{% url 'order_accessory' %}">
+                {% csrf_token %}
+                <div class="form-row">
+                  <div class="form-group col">
+                    <input type="text" class="form-control" name="name" placeholder="Your Name" required />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-lg-6">
+                    <input type="text" class="form-control" name="phone" placeholder="Phone Number" required />
+                  </div>
+                  <div class="form-group col">
+                    <input type="email" class="form-control" name="email" placeholder="Email" required />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col">
+                    <textarea class="message-box form-control" name="message" placeholder="Selected Accessories"
+                      required></textarea>
+                  </div>
+                </div>
+                <div class="btn_box">
+                  <button type="submit">Order</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
 
   <!-- Load More Button -->
-  <div class="load-more-container"
+  <!-- <div class="load-more-container"
     style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px;">
     <button id="loadMore"
       style="background-color: #007bff; color: white; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer;">
@@ -222,11 +261,11 @@
     </button>
   </div>
 
-  <br>
+  <br> -->
 
 
   <!-- movies new form  -->
-  <section class="contact_section">
+  <!-- <section class="contact_section">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 px-0">
@@ -268,13 +307,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- movies new form  -->
 
-  <br><br>
+  <!-- <br><br> -->
 
   <!-- end movies order section -->
-   <!-- info section -->
+  <!-- info section -->
   <section class="info_section ">
     <div class="container">
       <div class="info_top">
@@ -286,7 +325,8 @@
           </div>
           <div class="col-md-5 ">
             <div class="info_contact">
-              <a href="https://www.google.com/maps/place/AVENUE+MALL/@0.0395765,37.6527027,17z/data=!3m1!4b1!4m6!3m5!1s0x178821c445cd526d:0x77b8492b4274e644!8m2!3d0.0395765!4d37.6527027!16s%2Fg%2F11v5s528nm?hl=en-KE&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D">
+              <a
+                href="https://www.google.com/maps/place/AVENUE+MALL/@0.0395765,37.6527027,17z/data=!3m1!4b1!4m6!3m5!1s0x178821c445cd526d:0x77b8492b4274e644!8m2!3d0.0395765!4d37.6527027!16s%2Fg%2F11v5s528nm?hl=en-KE&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
                   Location
@@ -322,9 +362,11 @@
         <div class="row">
           <div class="col-lg-3 col-md-6">
             <div class="info_detail">
-              
+
               <p>
-                The zenplay gaming shop offers a wide selection of video games, consoles, and accessories. With easy navigation and secure payment options, it ensures a smooth shopping experience. Regular discounts are available.
+                The zenplay gaming shop offers a wide selection of video games, consoles, and accessories. With easy
+                navigation and secure payment options, it ensures a smooth shopping experience. Regular discounts are
+                available.
               </p>
             </div>
           </div>
@@ -413,104 +455,65 @@
     </div>
   </footer>
   <!-- footer section -->
-
   <script>
-    const API_KEY_TMDB = 'd710ffb597f3b14b49a3b7c98e9e16d9'; // Your TMDB API key
-    let currentPage = 1;
-    const PAGE_SIZE = 5; // Number of movies to fetch per request
-    const API_URL = (page) => `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY_TMDB}&language=en-US&page=${page}`;
+    let accessories = [
+      { name: 'USB-C Cable', image: '/static/images/usb_cable.jpg' },
+      { name: 'Bluetooth Headphones', image: '/static/images/headphones.jpg' },
+      { name: 'Fast Charging Dock', image: '/static/images/charging_dock.jpg' },
+      { name: 'Gaming Pad', image: '/static/images/gaming_pad.jpg' },
+      { name: 'Uno Card Game', image: '/static/images/uno.jpg' }
+    ];
 
-    async function fetchMovies(page) {
-      try {
-        const response = await fetch(API_URL(page));
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        const slideshowContainer = document.getElementById('slideshowContainer');
+    const slideshowContainer = document.getElementById('slideshowContainer');
 
-        data.results.forEach(item => {
-          const movieTitle = item.title;
-          const moviePoster = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+    function loadAccessories() {
+      accessories.forEach(accessory => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.setAttribute('data-selected', 'false');
 
-          const slide = document.createElement('div');
-          slide.className = 'slide';
+        const selectionDot = document.createElement('div');
+        selectionDot.className = 'selection-dot';
+        selectionDot.onclick = (e) => {
+          e.stopPropagation();
+          toggleSelection(slide, accessory.name);
+        };
 
-          // Initialize the card as unselected
-          slide.setAttribute('data-selected', 'false');
+        slide.onclick = () => {
+          console.log(`Accessory clicked: ${accessory.name}`);
+        };
 
-          // Add click event to the selection dot only
-          const selectionDot = document.createElement('div');
-          selectionDot.className = 'selection-dot';
-          selectionDot.onclick = (e) => {
-              e.stopPropagation(); // Prevent the click from triggering the slide's onclick 
-              toggleSelection(slide, movieTitle);
-          };
+        slide.innerHTML = `
+                <img src="${accessory.image}" alt="${accessory.name}">
+                <div class="caption">${accessory.name}</div>
+            `;
 
-          // Open trailer search when clicking anywhere on the slide
-          slide.onclick = () => {
-                    openTrailerSearch(movieTitle);
-                };
-
-
-          // Add content to the slide
-          slide.innerHTML = `
-          <img src="${moviePoster}" alt="${movieTitle}">
-          <div class="caption">${movieTitle}</div>
-          `;
-          
-          // Append the selection dot inside the slide
-          slide.appendChild(selectionDot);
-
-          slideshowContainer.appendChild(slide);
-        });
-      } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
-      }
+        slide.appendChild(selectionDot);
+        slideshowContainer.appendChild(slide);
+      });
     }
 
-    function toggleSelection(slide, movieTitle) {
+    function toggleSelection(slide, accessoryName) {
       const isSelected = slide.getAttribute('data-selected') === 'true';
 
-      // Reference to the message box
       const messageBox = document.querySelector('textarea[name="message"]');
-
-      // Split existing message into an array of movie titles
-      let selectedMovies = messageBox.value ? messageBox.value.split(', ') : [];
+      let selectedAccessories = messageBox.value ? messageBox.value.split(', ') : [];
 
       if (isSelected) {
-        // Remove the movie title from the selected list
-        selectedMovies = selectedMovies.filter(movie => movie !== movieTitle);
+        selectedAccessories = selectedAccessories.filter(item => item !== accessoryName);
         slide.setAttribute('data-selected', 'false');
         slide.querySelector('.selection-dot').classList.remove('selected');
       } else {
-        // Add the movie title to the selected list
-        selectedMovies.push(movieTitle);
+        selectedAccessories.push(accessoryName);
         slide.setAttribute('data-selected', 'true');
         slide.querySelector('.selection-dot').classList.add('selected');
       }
 
-      // Update the message box with the selected movies
-      messageBox.value = selectedMovies.join(', ');
-
-      console.log(`Movie "${movieTitle}" selected: ${!isSelected}`);
+      messageBox.value = selectedAccessories.join(', ');
     }
-
-    function openTrailerSearch(movieTitle) {
-      const videoUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(movieTitle + ' trailer')}`;
-      window.open(videoUrl, '_blank');
-  
-      // Set the movie title in the order form
-      document.querySelector('input[name="movieTitle"]').value = movieTitle; // Updated to match your form
-    }
-
-    // Load more movies on button click
-    document.getElementById('loadMore').addEventListener('click', function () {
-      currentPage++;
-      fetchMovies(currentPage);
-    });
-
-    // Fetch initial movies on page load
-    fetchMovies(currentPage);
   </script>
+
+
 
 
 
